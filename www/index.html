@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Dictionnaire Dogon‑Français</title>
+    <meta name="description" content="Recherche interactive d'un dictionnaire Dogon‑Français avec filtres et favoris (mobile version)." />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="header">
+        <h1>Dictionnaire Dogon‑Français</h1>
+        <div class="controls">
+            <div class="search-wrapper">
+                <input type="text" id="search" placeholder="Rechercher un mot…" autocomplete="off" />
+            </div>
+            <div class="filter-row">
+                <select id="typeFilter"><option value="">Tous les types</option></select>
+                <button id="favToggle" class="fav-toggle">❤️ Favoris</button>
+            </div>
+            <div id="letterFilter" class="letter-filter"></div>
+        </div>
+    </header>
+    <main class="content" id="results"></main>
+    <footer class="footer">© 2026 – Projet Dogon</footer>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

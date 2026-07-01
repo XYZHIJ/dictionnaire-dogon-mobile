@@ -1,0 +1,16 @@
+{
+  "name": "Dictionnaire Dogon-Français",
+  "short_name": "DogonDict",
+  "description": "Recherche interactive d'un dictionnaire Dogon-Français",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b5998",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

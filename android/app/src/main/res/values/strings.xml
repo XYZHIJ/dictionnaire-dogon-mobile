@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Dictionnaire Dogon</string>
+    <string name="title_activity_main">Dictionnaire Dogon</string>
+    <string name="package_name">com.dogondict.app</string>
+    <string name="custom_url_scheme">com.dogondict.app</string>
+</resources>
