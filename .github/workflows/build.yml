@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: |
@@ -30,6 +30,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
 
       - name: Build Android APK
         run: |
@@ -51,7 +54,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: |
@@ -61,16 +64,32 @@ jobs:
         run: |
           npx cap sync ios
 
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios/App
+          pod install
+
       - name: Build iOS App
         run: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -sdk iphoneos -configuration Debug CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO SYMROOT=build clean build
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -sdk iphoneos \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            SYMROOT=build \
+            clean build
 
       - name: Package iOS App (IPA)
         run: |
           cd ios/App
-          mkdir Payload
-          cp -r build/Debug-iphoneos/App.app Payload/
+          BUILD_DIR=$(find build -name "*.app" -maxdepth 4 | head -1 | xargs dirname)
+          APP_NAME=$(find build -name "*.app" -maxdepth 4 | head -1 | xargs basename)
+          mkdir -p Payload
+          cp -r "build/$APP_NAME" Payload/ 2>/dev/null || cp -r "$BUILD_DIR/$APP_NAME" Payload/
           zip -r DictionnaireDogon.ipa Payload
 
       - name: Upload iOS IPA
